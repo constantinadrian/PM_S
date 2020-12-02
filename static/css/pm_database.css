@@ -1,0 +1,126 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* ----------- Colors for font awesome icon on btn from datatable ---------- */
+.fa-file-csv
+{
+    color: #00D024;
+}
+
+.fa-file-excel
+{
+    color: #00D024;
+}
+
+.fa-file-pdf
+{
+    color: red;
+}
+
+.fa-print
+{
+    color: #95c2f4;
+}
+/* ----------- End Colors for font awesome icon on btn from datatable ---------- */
+
+
+/* ---------- for datatable status column to display badge font ---------- */
+.badge-font
+{
+    font-size: 0.8em;
+    font-family: arial,sans-serif;
+}
+
+
+/* -------------- Remove the underline from the edit link -------------- */
+#pm-table a
+{
+    text-decoration: none;
+}
+
+
+/* ---------------- FOR BOOTSTRAP MODAL --------------- */
+/* hide modal div job details */
+#modalJobDetails
+{
+    display: none;
+}
+
+/* give color and font size for modal label */
+.modal-body .form-group label
+{
+    color: gray;
+    font-size: 80%;
+}
+
+.has-error
+{
+    border: 1px solid red;
+}
+
+label.error{
+    color: red !important;
+    font-style: italic;
+}
+
+#deletePmDetails
+{
+    display: none;
+}
+
+#btn-modalPrevious
+{
+    display: none;  
+}
+
+#btnSave
+{
+    display: none;
+}
+
+.span-text
+{
+    color:red;
+    font-size: 80%;
+    font-style: italic;
+}
+
+/* make border for btn delete cancel inside modal */
+#btnDeleteCancel
+{
+    border-color: slategrey;
+}
+
+/* display the btn on main footer and second footer */
+.main-modal-footer, .second-modal-footer
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding: 15px 15px;
+    border-top: 1px solid gainsboro;
+}
+
+.left-btn 
+{
+    float: left;
+}
+
+.right-btn
+{
+    float: right; 
+}
+
+.right-btn-inside
+{
+    display:inline-block;
+}
+/* ---------------- END OF BOOTSTRAP MODAL --------------- */
+

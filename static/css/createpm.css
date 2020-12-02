@@ -1,0 +1,81 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* ---------------- For create PM div and form --------------- */
+.create-pm-container
+{
+    -webkit-box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.68);
+            box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.68);
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    color: #000000;
+}
+
+.create-pm
+{
+    text-align: left;
+}
+
+.create-pm .form-group label
+{
+    font-size: 80%;
+}
+
+.span-text
+{
+    color:red;
+    font-size: 80%;
+    font-style: italic;
+}
+
+/* show the createPm page with only one section of form */
+#jobDetails
+{
+    display: none;
+}
+
+/* for display error input border from jquery validation */
+.has-error
+{
+    border: 1px solid red;
+}
+
+/* for display error message from jquery validation */
+label.error{
+    color: red !important;
+    font-style: italic;
+}
+
+.btn-sm
+{
+    padding: 3px 15px !important;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+#jobDetailsFooter
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+
+.left-btn 
+{
+    float: left;
+}
+
+.right-btn
+{
+    float: right; 
+}
+/* ---------------- End of create PM div and form --------------- */
+

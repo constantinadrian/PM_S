@@ -1,0 +1,81 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* -------------- For report charts div -------------- */
+.report-container
+{
+    text-align: center;
+}
+
+#myPieChartContainer
+{
+    height: 300px !important;
+    margin-top: 10%; 
+}
+
+canvas 
+{
+    border: 1px dotted red;
+}
+
+#myBarChartContainer
+{
+    height: 300px !important;
+    margin-top: 10%;
+    color: rgb(8, 154, 0)
+}
+
+#pmWorkOrders
+{
+    margin-top: 5%;
+}
+
+#myLineChartContainer
+{
+    height: 500px !important;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+/* -------------- End report charts div -------------- */
+
+
+/* -------------- For report history div -------------- */
+.calendar-history-footer
+{
+    margin-top: 2%;
+    text-align: center;
+}
+
+.low-priority, .medium-priority, .critical-priority, .complete-priority
+{
+    display: inline-block;
+    padding: 20px;
+}
+/* -------------- End of report div -------------- */
+
+
+/*------------ Media Queries ------------*/
+@media screen and (max-width:768px)
+{
+    #myPieChartContainer
+    {
+        height: 200px !important;
+        padding: 0 5px;   
+    }
+
+    #myBarChartContainer
+    {
+        height: 200px !important;
+        padding: 0 5px;
+    }
+
+    #myLineChartContainer
+    {
+        height: 250px !important;
+        padding: 0 5px;
+    }
+}

@@ -1,0 +1,36 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* ----------- Colors for font awesome icon on btn from datatable ---------- */
+.fa-file-csv
+{
+    color: #00D024;
+}
+
+.fa-file-excel
+{
+    color: #00D024;
+}
+
+.fa-file-pdf
+{
+    color: red;
+}
+
+.fa-print
+{
+    color: #95c2f4;
+}
+/* ----------- End Colors for font awesome icon on btn from datatable ---------- */
+
+
+/* -------------- Remove the underline from the edit link -------------- */
+#pm-table a
+{
+    text-decoration: none;
+}
+

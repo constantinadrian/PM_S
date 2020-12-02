@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no">
+
+        <!-- Define keywords for search engines: -->
+        <meta name="keywords" content="pm, schedule, preventive, maintenance, invoice">
+        
+        <!-- Define a description of your web page: -->
+        <meta name="description" content="PM Schedule is an web app that keeps records of each preventive maintenance and generate invoices once the pm is complete">
+        
+        <!-- Define the author of a page: -->
+        <meta name="author" content="">
+
+        <!-- Rel Canonical Tag - Prevent duplicate content issues. Using it improves a site's SEO (Search Engine Optimization) -->
+        <!-- <link rel="canonical" href=""/> --> 
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet"> 
+        
+        <!-- Main CSS -->
+        <link href="/static/css/style.css" rel="stylesheet">
+
+        <link href="/static/img/favicon.ico" rel="icon">
+        {% block extra_style %}{% endblock %}
+
+        <!-- jQuery 3.3.1 and Popper 1.14.3 -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        {% block moment_script %}{% endblock %}
+        <!-- Bootstrap JS -4.1.3 -->
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <!-- Font Awesome -->
+        <script type="text/javascript" src="https://kit.fontawesome.com/a743d09ae8.js" crossorigin="anonymous"></script>
+        <!-- Main js -->
+        <script type="text/javascript" src="static/js/script.js"></script>
+        {% block extra_script %}{% endblock %}
+
+
+        <title>PM Schedule: {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="page-content">
+            <div class="content-inside">
+                <nav class="navbar navbar-expand-md navbar-light sticky-top">
+                    {% if session.user_id %}
+                        <a class="navbar-brand navbar-text-size" href="/schedule"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-gear-wide-connected" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 0 0-9.995 4.998 4.998 0 0 0 0 9.996z"/>
+                            <path fill-rule="evenodd" d="M7.375 8L4.602 4.302l.8-.6L8.25 7.5h4.748v1H8.25L5.4 12.298l-.8-.6L7.376 8z"/>
+                          </svg><span class="blue">&nbsp;P</span><span class="red">M</span><span class="sunray">&nbsp;Schedule<sup>&reg;</sup></span></a>
+                    {% else %}
+                        <a class="navbar-brand navbar-text-size" href="/"><svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-gear-wide-connected" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 0 0-9.995 4.998 4.998 0 0 0 0 9.996z"/>
+                            <path fill-rule="evenodd" d="M7.375 8L4.602 4.302l.8-.6L8.25 7.5h4.748v1H8.25L5.4 12.298l-.8-.6L7.376 8z"/>
+                          </svg><span class="blue">&nbsp;P</span><span class="red">M</span><span class="sunray">&nbsp;Schedule<sup>&reg;</sup></span></a>
+                    {% endif %}
+                    <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler {% block collapse_class %}{% endblock %}" data-target="#navbar" data-toggle="collapse" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse {% block list_class %}{% endblock %}" id="navbar">
+                        {% if session.user_id %}
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item"><a class="nav-link" href="/schedule"><i class="far fa-calendar-alt"></i>&nbsp;Schedule</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/createpm"><i class="fas fa-wrench"></i>&nbsp;Create PM</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/pm"><i class="fas fa-cogs"></i> PM's</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/records"><i class="far fa-list-alt"></i>&nbsp;Records</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/report"><i class="fas fa-chart-pie"></i>&nbsp;Report</a></li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item"><a class="nav-link" href="/account"><i class="fas fa-user-cog fa-sm"></i>&nbsp;Your Account</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="navbar-nav ml-auto">
+                                <!-- <li class="nav-item"><a class="nav-link" href="/register"><i class="fas fa-user-plus fa-sm"></i>&nbsp;Register</a></li> -->
+                                <li class="nav-item"><a class="nav-link" href="/#price"><i class="fas fa-dollar-sign fa-sm"></i>&nbsp;Pricing</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i>&nbsp;Log In</a></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+                </nav>
+
+                <!-- {% if get_flashed_messages() %}
+                    <header>
+                        <div class="alert alert-primary border text-center" id="flashMessage" role="alert">
+                            {{ get_flashed_messages() | join(" ") }}
+                        </div>
+                    </header>
+                {% endif %} -->
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <header>
+                                <div class="alert {{ category }} border text-center" id="flashMessage" role="alert">
+                                    {{ message }}
+                                </div>
+                            </header>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <main class="container p-5">
+                    {% block main %}{% endblock %}
+                </main>
+
+                <!-- add sections on landing page for info -->
+                {% block landing_page_sections %}{% endblock %}
+               
+            </div>
+        </div>
+        {% block javascript %}
+
+        {% endblock %}
+
+        <div class='footer'>
+            <footer class="small text-center text-white">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12">
+                        <h5>Company</h5>
+                        <hr>
+                        <p>PM Schedule Limited</p>
+                        <p>123 Main Street</p>
+                        <p>Dublin D01 A001</p>
+                        <p>Ireland</p>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <h5>Other</h5>
+                        <hr>
+                        <p><a class="footer-other" href="#">Terms and Conditions</a></p>
+                        <p><a class="footer-other" href="#">Privacy Policy</a></p>
+                        <p><a class="footer-other" href="#">License</a></p>
+                        <p><a class="footer-other" href="#">FAQ's</a></p>
+                        <p><a class="footer-other" href="/attribute">Credit Page All Attibution</a></p>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <h5>Social</h5>
+                        <hr>
+
+                        <nav class="navbar">  
+                            <a class="link-linkedin" href="https://www.linkedin.com/" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                            <a class="link-facebook" href="https://www.facebook.com/" title="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                            <a class="link-twitter" href="https://twitter.com/" title="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a class="link-youtube" href="https://www.youtube.com/" title="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        </nav> 
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class='col-md-4 col-sm-12'>&copy; PM-Schedule<sup>&reg;</sup> 2020</div>
+                    <div class='col-md-4 col-sm-12'>This project is for purposes of education only.</div>
+                    <div class='col-md-4 col-sm-12'>Created by Constantin Adrian Chiriac for <a href="https://cs50.harvard.edu/x/2020/" target="_blank">CS50x</a></div>
+                </div>            
+            </footer>
+        </div>
+    </body>
+
+</html>

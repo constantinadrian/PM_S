@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Account
+{% endblock %}
+
+
+<!--for extra style-->
+{% block extra_style %}
+<link rel="stylesheet" type="text/css" href="static/css/account.css">
+{% endblock %}
+
+
+{% block main %}
+
+    <div class='account-container'>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class='profile'>
+                    <a href="/profile">
+                        <img src="static/img/icons8-administrator-male-100.png" id='profile-img1' alt="Password img">
+                        <img src="static/img/icons8-admin-settings-male-100.png" id='profile-img2' alt="Password img">
+                        <h3>Edit your info&nbsp;<i class="far fa-user"></i></h3>
+                    </a>
+                    <!-- site credit on footer: <a target="_blank" href="https://icons8.com/icons/set/administrator-male">Administrator Male icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>  -->
+                    <!-- site credit on footer: <a target="_blank" href="https://icons8.com/icons/set/admin-settings-male">Admin Settings Male icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>  -->
+                </div>   
+            
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+                <div class="password-reset">
+                    <a href="/changepassword">
+                        <img src="static/img/icons8-password-100.png" id='pass-img1' alt="Password img">
+                        <img src="static/img/icons8-password-100-1.png" id='pass-img2' alt="Password img">
+                        <h3>Change Password&nbsp;<i class="fas fa-key"></i></h3>
+                    </a>
+                    <!-- site credit on footer: <a target="_blank" href="https://icons8.com/icons/set/password">Password icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>  -->
+                    <!-- site credit on footer: <a target="_blank" href="https://icons8.com/icons/set/password">Password icon</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>  -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script type="text/javascript" src="static/js/account.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,94 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* -------------- For calendar divs -------------- */
+.calendar-background-container
+{
+    background-color:  #8ab654;
+    border-radius: 0.8rem;
+    padding: 25px 25px;
+}
+
+.calendar-history-footer
+{
+    margin-top: 2%;
+    text-align: center;
+}
+
+.low-priority, .medium-priority, .critical-priority, .complete-priority
+{
+    display: inline-block;
+    padding: 20px;
+}
+/* -------------- End of calendar divs -------------- */
+
+
+/* ---------------- For Modal ----------------- */
+.modal-content
+{
+    text-align: left;
+}
+
+.modal-header, .modal-footer
+{
+    background-color: #8ab654;
+}
+
+.modal-body
+{
+    background-color: #f0efeb;
+}
+/* ---------------- For Modal ----------------- */
+
+
+
+/* ---------------- for calendar event ---------------- */
+/* all clases for fullcalendar.io in case we want to make any changes */
+/* https://github.com/fullcalendar/fullcalendar-scheduler/tree/72fb3a7c288fc6ca0014051628b840f7e5a429a6/timeline/src/styles */
+.fc-event
+{
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+/* for event box test */
+.fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+    font-size: 0;
+    overflow: hidden;
+    height: 20px;
+}
+/* ---------------- for calendar event ---------------- */
+
+
+/*------------ Media Queries ------------*/
+@media screen and (max-width:768px)
+{
+    /* override the bootstrap p-5 class for media screen */
+    .p-5 {
+        padding: 20px 15px !important;
+    }
+
+    /* -------------- For small callendar -------------- */
+    /* all clases for fullcalendar.io in case we want to make any changes */
+    /* https://github.com/fullcalendar/fullcalendar-scheduler/tree/72fb3a7c288fc6ca0014051628b840f7e5a429a6/timeline/src/styles */
+    #calendar {
+        font-size: 9px;
+    }
+    .fc-toolbar {
+        font-size: .9em;
+    }
+    .fc-toolbar h2 {
+        font-size: 12px;
+        white-space: normal !important;
+    }
+    /* for event box text content */
+    .fc-content
+    {
+        font-size: 9px;
+    }
+    /* -------------- End of calendar -------------- */
+}

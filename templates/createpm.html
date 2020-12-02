@@ -1,0 +1,226 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create PM
+{% endblock %}
+
+
+<!--for extra style-->
+{% block extra_style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
+<link rel="stylesheet" href="static/css/createpm.css">
+{% endblock %}
+
+{% block moment_script %}
+<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+{% endblock %}
+
+{% block extra_script %}
+<!-- For Validate jQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js"></script>
+{% endblock %}
+
+{% block main %}
+<div class='create-pm-container'>
+    <section class="create-pm">
+        <form action="/createpm" method="post" id='form-createpm' autocomplete="off">
+            <!-- Company Details -->
+
+            <div id='companyDetails'>
+                <h3 class='showHideContent' id="showHideCompanyDetails">Company Details <i class="far fa-caret-square-down fa-sm"></i></h3> <br>                
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address1">Address</label>
+                            <input type="text" class="form-control" id="address1" name="address1" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address2">Address 2</label>
+                            <input type="text" class="form-control" id="address2" name="address2" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address3">Address 3</label>
+                            <input type="text" class="form-control" id="address3" name="address3" placeholder="" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="landlineNumber">Landline Number</label>
+                            <input type="tel" class="form-control" id="landlineNumber" name="landlineNumber" placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactName">Contact Name</label>
+                            <input type="text" class="form-control" id="contactName" name="contactName" placeholder="" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12"> 
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" name="city" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="zipCode">Zip/Postal Code</label>
+                            <input type="text" class="form-control" id="zipCode" name="zipCode" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <br><button type="button" class="btn btn-light btn-sm" id='btn-Next'>Next&nbsp;<i class="fas fa-caret-right"></i></button>
+            </div>
+            <!-- End of Company Details -->
+
+            <!-- Job Details -->
+            <div id='jobDetails'>
+                <h3 class='showHideContent' id="showHideJobDetails">Job Details <i class="far fa-caret-square-up fa-sm"></i></h3> <br>
+                <div class="form-row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="technician">Technician</label>
+                            <input type="text" class="form-control" id="technician" name="technician" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobType">Job Type</label>
+                            <input type="text" class="form-control" id="jobType" name="jobType" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description</label>
+                            <textarea class="form-control" id="jobDescription" name="jobDescription" rows="4" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="jobPrice">Service/Job Fee</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                                </div>
+                                <input type="text" class="form-control" id="jobPrice" name="jobPrice" placeholder="" required>
+                            </div>
+                        </div>
+
+                        <!-- Form-row for DateTimePicker -->
+                        <div class="form-row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="start_event">Job Starts at</label>
+                                    <input type="text" class="form-control" name="start_event" id="start_event" required readonly>
+                                    <span class="start-event-span span-text"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="end_event">Job Ends at</label>
+                                    <input type="text" class="form-control" name="end_event" id="end_event" required readonly> 
+                                    <span class="end-event-span span-text"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Form-row for DateTimePicker -->
+
+                        <div class="form-row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="labourHours">Labour Hours</label>
+                                    <input type="text" class="form-control" name="labourHours" id="labourHours" readonly> 
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-12">
+                                <div class="form-group">
+                                    <label for="labourRate">Labour Rate</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                                        </div>
+                                        <input type="text" class="form-control" id="labourRate" name="labourRate" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="jobPriority">Priority</label>
+                                    <select id="jobPriority" name="jobPriority" class="form-control" required>
+                                        <option selected disabled="disabled" value="">Choose...</option>
+                                        <option value="Low Priority">Low Priority</option>
+                                        <option value="Medium Priority">Medium Priority</option>
+                                        <option value="Critical Priority">Critical Priority</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select id="status" name="status" class="form-control" required>
+                                        <option selected disabled="disabled" value="">Choose...</option>
+                                        <option value="Open">Open</option>
+                                        <option value="Complete">Complete</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <br>
+                <div id='jobDetailsFooter'>
+                    <div class='left-btn'>
+                        <button type="button" class="btn btn-light btn-sm" id='btn-Previous'><i class="fas fa-caret-left"></i>&nbsp;Previous</button>
+                    </div>
+
+                    <div class="right-btn">
+                        <button type="submit" class="btn btn-success btn-sm" id='btn-savePm'>Save PM</button>   
+                    </div>
+                </div>
+            </div>
+            <!-- End of Job Details btn-light btn-sm --> 
+            
+        </form>
+    </section>
+
+</div>  
+
+{% endblock %}
+
+
+{% block javascript %}
+
+
+<script>
+    var publicHolidayJson = JSON.parse('{{ getPublicHoliday | tojson | safe }}');
+</script>
+
+<script type="text/javascript" src="static/js/disablepastdates.js"></script>
+
+<script type="text/javascript" src="static/js/createpm.js"></script>
+
+{% endblock %}

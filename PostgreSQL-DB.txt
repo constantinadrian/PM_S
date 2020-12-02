@@ -1,0 +1,86 @@
+CREATE TABLE users (
+id SERIAL PRIMARY KEY NOT NULL,
+username TEXT NOT NULL,
+hash TEXT NOT NULL,
+register TIMESTAMP with time zone NOT NULL
+);
+
+CREATE TABLE usersDetails (
+id SERIAL PRIMARY KEY NOT NULL,
+userCompanyName VARCHAR (255) NOT NULL,
+userAddress1 VARCHAR (120) NOT NULL,
+userAddress2 VARCHAR (120),
+userAddress3 VARCHAR (120),
+userCity VARCHAR (120) NOT NULL,
+userCountry VARCHAR (120) NOT NULL,
+userZipCode VARCHAR (20) NOT NULL, 
+userCompanyRegistrationNumber VARCHAR (10) NOT NULL,
+userCompanyVatRate NUMERIC(5,3) NOT NULL,
+userPhoneNumber VARCHAR (20) NOT NULL,
+userLandlineNumber VARCHAR (20) NOT NULL,
+userEmail VARCHAR (254) NOT NULL,
+userContactName VARCHAR (255) NOT NULL,
+user_id INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE companyDetails (
+id SERIAL PRIMARY KEY NOT NULL,
+companyName VARCHAR (255) NOT NULL,
+address1 VARCHAR (120) NOT NULL,
+address2 VARCHAR (120),
+address3 VARCHAR (120),
+city VARCHAR (120) NOT NULL,
+zipCode VARCHAR (20) NOT NULL,
+contactName VARCHAR (255) NOT NULL,
+phoneNumber VARCHAR (20) NOT NULL,
+landlineNumber VARCHAR (20) NOT NULL,
+email VARCHAR (254) NOT NULL,
+user_id INTEGER NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE jobDetails (
+id SERIAL PRIMARY KEY NOT NULL,
+title VARCHAR(255) NOT NULL,
+jobDescription TEXT NOT NULL,
+quantity INTEGER DEFAULT 1 NOT NULL,
+start_event TIMESTAMP with time zone NOT NULL,
+end_event TIMESTAMP with time zone NOT NULL,
+jobPrice NUMERIC(10, 2) NOT NULL,
+jobPriority VARCHAR (25) NOT NULL,
+status VARCHAR (10) NOT NULL,
+technician VARCHAR(255) NOT NULL,
+user_id INTEGER NOT NULL,
+companyDetails_id INTEGER NOT NULL,
+FOREIGN KEY (companyDetails_id) REFERENCES companyDetails(id),
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE jobLabor (
+id SERIAL PRIMARY KEY NOT NULL,
+labourDescription VARCHAR (25) NOT NULL DEFAULT 'Labor',
+labourHours REAL NOT NULL,
+labourRate NUMERIC(10, 2) NOT NULL,
+labourTotalPrice NUMERIC(10, 2) NOT NULL,
+user_id INTEGER NOT NULL,
+jobDetails_id INTEGER NOT NULL,
+FOREIGN KEY (jobDetails_id) REFERENCES jobDetails(id),
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE invoice (
+id SERIAL PRIMARY KEY NOT NULL,
+invoiceNumber VARCHAR (28) NOT NULL,
+dateOfIssue DATE NOT NULL,
+dueDate DATE NOT NULL,
+subTotal NUMERIC(10, 2) NOT NULL,
+taxRate NUMERIC(5,3) NOT NULL,
+tax NUMERIC(10, 2) NOT NULL,
+totalPrice NUMERIC(10, 2) NOT NULL,
+user_id INTEGER NOT NULL,
+jobLabor_id INTEGER NOT NULL,
+
+FOREIGN KEY (jobLabor_id) REFERENCES jobLabor(id),
+FOREIGN KEY (user_id) REFERENCES users(id)
+);

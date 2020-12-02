@@ -1,0 +1,217 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+body 
+{
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f0efeb;
+    font-family: 'Roboto', sans-serif;
+}
+
+p
+{
+    font-family: 'Playfair Display', serif;
+}
+
+
+/* --------------------- Make page content min-height 100 viewport's height ------------------- */
+.page-content 
+{
+    min-height: 100vh;
+}
+
+
+/* --------------------- Navigation ------------------- */
+nav
+{
+    background-color: #3C3744;
+}
+
+.content-inside nav li a:link, .mainHeader nav li a:visited
+{
+    padding: 7px 25px;
+}
+
+.content-inside nav ul li a:hover, .content-inside nav ul li a:active
+{
+    background-color: #EEB868;
+}
+
+.content-inside nav ul li a 
+{
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+/* .white_nav_list_item ul li a:link, .white_nav_list_item ul li a:visited */
+.navbar-light ul li a:link, .navbar-light ul li a:visited
+{
+    color: #fff !important;
+}
+
+/* --------------------- colors for brand ------------------- */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+
+nav .navbar-brand .sunray
+{
+    color: #f5b92e;
+}
+/* --------------------- End of Navigation ------------------- */
+
+
+/* ---------------- Div from attribute page ------------------ */
+.attribute-container 
+{
+    text-align: center;
+}
+/* ---------------- End Div from attribute page ------------------ */
+
+
+/* -------------- Footer of the page -------------- */
+.footer {
+    /* height: 60px; */
+    background-color: #3C3744;
+    padding: 1rem;
+}
+
+.footer nav
+{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.footer nav a
+{
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    padding-top: 5px;
+}
+
+/* --- social --- */
+nav a.link-linkedin
+{
+    background-color: #0e76a8;
+    color: white;
+}
+
+nav a.link-linkedin:hover
+{
+    background-color: white;
+    color: #0e76a8;
+}
+
+nav a.link-facebook
+{
+    background-color: #3b5998;
+    color: white;
+}
+
+nav a.link-facebook:hover
+{
+    background-color: white;
+    color: #3b5998;
+}
+
+nav a.link-twitter 
+{
+    background-color: #00acee;
+    color: white;
+}
+
+nav a.link-twitter:hover 
+{
+    background-color: white;
+    color: #00acee;
+}
+
+nav a.link-youtube
+{
+    background-color: #FF0000; 
+    color:  white;
+}
+
+nav a.link-youtube:hover
+{
+    background-color: white;
+    color:  #FF0000; 
+}
+
+.footer-other
+{
+    color:  white;
+    text-decoration: none !important;
+}
+/* -------------- End of footer of the page -------------- */
+
+
+/* -------------- Media Queries Tables (iPad)  -------------- */
+@media screen and (max-width:1366px)
+{
+    .footer nav
+    {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+/*------------ Media Queries phones ------------*/
+@media screen and (max-width:768px)
+{
+    /* override the bootstrap p-5 class */
+    .p-5 
+    {
+        padding: 15px 10px !important;
+    }
+
+    /*  ------------- apology img -------------  */
+    main img
+    {
+        /* constrain images on small screens */
+        max-width: 100%;
+    }
+    /*  ------------- End apology img -------------  */
+
+
+    /*  ------------- Navigation -------------  */
+    .content-inside nav li a:link
+    {
+        text-align: left;
+        padding: 7px 5px;
+    }
+
+    /*  ------------- Change h3 font-size on small devices-------------  */
+    h3 
+    {
+        font-size: 20px;
+    }
+
+    .footer 
+    {
+        padding: 0.8rem;
+    }
+
+    .footer nav
+    {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}

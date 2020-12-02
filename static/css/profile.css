@@ -1,0 +1,80 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* -------------- For profile plain text display -------------- */
+
+/* set the border and background color to transparent for select field when showing the form in plain text */
+.form-control-plaintext-select
+{
+    background-color:transparent !important;
+    border: transparent !important;
+}
+
+/* hide the arrow from the select field when showing the form in plain text */
+.custom-select-plaintext
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none; 
+}
+
+/* Increase font size of user About details section */
+.about
+{
+    font-size: 1.3em;
+}
+
+/* hide the company details until user decide to see them by press the btn */
+#companyDetails
+{
+    display: none;
+}
+/* -------------- For profile plain text display -------------- */
+
+
+/* -------------- Remove the underline from the edit link -------------- */
+#companyDetails a
+{
+    text-decoration: none;
+}
+
+
+/* -------------- For profile btn -------------- */
+
+/* position of edit btn for company details */
+#editCompanyDetails
+{
+    float: right;
+}
+
+/* hide update detaild btn until user select edit details */
+#btnUpdateDetails
+{
+    display: none;
+}
+/* -------------- End of profile btn -------------- */
+
+
+/* -------------- For jQuery validate error classes -------------- */
+
+/* for input border for error on jquery validation form */
+.has-error
+{
+    border: 1px solid red;
+}
+
+/* for label error on jquery validation form */
+label.error{
+    color: rgba(255, 99, 132, 1) !important;
+    font-style: italic;
+    padding: 2px 4px;
+    background-color: #003e48;;
+    border-radius: 5px;
+    border: 1px solid red;
+}
+/* -------------- End of jQuery validate error classes -------------- */

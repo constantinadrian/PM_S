@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Schedule
+{% endblock %}
+
+
+<!--for extra style-->
+{% block extra_style %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css">  
+
+    <link href="/static/css/scheduler.css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    
+{% endblock %}
+
+
+{% block main %}
+    <div class='calendar-background-container'>
+        <h2>PM Schedule</h2>
+        <br>
+        <!-- Calendar from https://fullcalendar.io/ -->
+        <div class="container">
+            <div id="calendar"></div>
+        </div>
+    </div> 
+
+    <div class="calendar-history-footer">
+        <div class="low-priority">
+            <span class="badge badge-pill badge-primary">Low Priority</span>
+        </div>
+        <div class="medium-priority">
+            <span class="badge badge-pill badge-warning">Medium Priority</span>
+        </div>
+        <div class="critical-priority">
+            <span class="badge badge-pill badge-danger">Critical Priority</span>
+        </div>
+        <div class="complete-priority">
+            <span class="badge badge-pill badge-success">Complete PM</span>
+        </div>
+    </div>
+
+    <!--Modal for each event-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"><span id="eventTitle"></span></h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p class="eventDetails"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    let data = JSON.parse('{{ rows | tojson | safe }}');
+    // console.log(data)
+</script>
+
+<!-- JS for Calendar -->
+<script type="text/javascript" src="/static/js/scheduler.js"></script>
+
+{% endblock %}

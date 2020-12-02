@@ -1,0 +1,57 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/* -------------- For divs -------------- */
+.account-container 
+{
+    text-align: center;
+}
+
+.account-container .profile , .account-container .password-reset 
+{
+    -webkit-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+}
+
+.profile a, .password-reset a
+{
+    margin-top: 10%;
+    background-color: bisque;
+    width: 100%;
+    padding: 30px 30px;
+    display: inline-block;
+    border-radius: 10px;
+    -webkit-box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.68);
+            box-shadow: 2px 3px 7px 2px rgba(0, 0, 0, 0.68);
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+#profile-img2, #pass-img2
+{
+    display: none;
+}
+
+.account-container .profile:hover , .account-container .password-reset:hover
+{
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+/* -------------- End of divs -------------- */
+
+
+/*------------ Media Queries ------------*/
+@media screen and (max-width:768px)
+{
+    .profile, .password-reset
+    {
+        width: 100%; 
+    }
+
+}

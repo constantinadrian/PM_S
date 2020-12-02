@@ -1,0 +1,475 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    PM's
+{% endblock %}
+
+
+<!--for extra style-->
+{% block extra_style %}
+<link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/buttons/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/responsive/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/rowgroup/css/rowGroup.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://nightly.datatables.net/scroller/css/scroller.bootstrap4.min.css">
+ 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css">
+
+<link rel="stylesheet" type="text/css" href="static/css/pm_database.css">
+{% endblock %}
+
+
+{% block moment_script %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/additional-methods.min.js"></script>
+{% endblock %}
+
+
+{% block extra_script %}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/buttons.semanticui.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/buttons.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/buttons/js/buttons.print.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/responsive/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/responsive/js/responsive.bootstrap4.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/rowgroup/js/dataTables.rowGroup.min.js"></script>
+<script type="text/javascript" src="https://nightly.datatables.net/scroller/js/dataTables.scroller.min.js"></script>
+{% endblock %}
+
+{% block main %}
+
+    {% if pm_datatable %}
+    <!-- Table functionality thanks to https://datatables.net/ -->
+    <div class="container pm-table">
+        <div id="buttons" class="d-flex justify-content-center"></div>
+        <table id="pm-table" class="table table-striped table-bordered table-hover" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>Job Type</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Technician</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in pm_datatable %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ row['companyname'] }}</td>
+                    <td>{{ row['title'] }}</td>
+                    <td>{{ row['address1'] + " " }} 
+                        {% if (row['address2'] != None or row['address2'] != '') %} {{ row['address2'] + " " }} {% endif %} 
+                        {% if (row['address3'] != None or row['address3'] != '') %} {{ row['address3'] }} {% endif %}</td>
+                    <td>{{ row['city'] }}</td>
+                    <td>{{ row['technician'] }}</td>
+                    <td>{{ row['jobpriority'] }}</td>
+                    {% if (row['status'] == 'Open') %}
+                        <td>
+                            <a href="#" data-toggle="tooltip" data-placement="right" title="Edit"><span data-toggle="modal" data-target="#updateModalDetails" data-company="{{ row['companyname'] }}" data-address1="{{ row['address1']}}" data-address2="{{ row['address2']}}" data-address3="{{ row['address3'] }}" data-phonenumber="{{ row['phonenumber'] }}" data-landlinenumber="{{ row['landlinenumber'] }}" data-email="{{ row['email'] }}" data-contactname="{{ row['contactname'] }}" data-city="{{ row['city'] }}" data-zipcode="{{ row['zipcode'] }}" data-technician="{{ row['technician'] }}" data-jobType="{{ row['title'] }}" data-jobdescription="{{ row['jobdescription'] }}" data-quantity="{{ row['quantity'] }}" data-jobprice="{{ row['jobprice'] }}" data-start_event="{{ row['start_event'] }}" data-end_event="{{ row['end_event'] }}" data-labourdescription="{{ row['labourdescription'] }}" data-labourhours="{{ row['labourhours'] }}" data-labourrate="{{ row['labourrate'] }}" data-labourtotalprice="{{ row['labourtotalprice'] }}" data-priority="{{ row['jobpriority'] }}" data-status="{{ row['status'] }}"><span class="badge badge-pill badge-warning badge-font d-inline">{{ row['status'] }}</span>&nbsp;<i class="far fa-edit d-inline"></i></span></a>   
+                        </td>
+                    {% else %}
+
+                        <td><span class="badge badge-pill badge-success badge-font">{{ row['status'] }}</span></td>
+
+                    {% endif %}    
+                </tr>
+                {% endfor %}
+            </tbody>
+        <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Company Name</th>
+                    <th>Job Type</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Technician</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    {% else %}
+
+    <p>You don't have any PM's at this moment.</p>
+
+    {% endif %}
+
+
+    <!-- Update Pm modal - https://getbootstrap.com/docs/4.0/components/modal/ -->
+<div class="modal fade" id="updateModalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <!-- <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"> -->
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pm" method="post" id="updateDetails" autocomplete="off">
+                
+                    <!-- Old Data Company Details -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-companyName" name="oldData-companyName" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-address1" name="oldData-address1" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-address2" name="oldData-address2" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-address3" name="oldData-address3" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-phoneNumber" name="oldData-phoneNumber" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-landlineNumber" name="oldData-landlineNumber" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-email" name="oldData-email" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-contactName" name="oldData-contactName" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-city" name="oldData-city" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-zipCode" name="oldData-zipCode" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <!-- Old Data Job Details -->
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-technician" name="oldData-technician" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-jobType" name="oldData-jobType" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" id="oldData-jobDescription" name="oldData-jobDescription" rows="4" form="updateDetails" required readonly hidden></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-jobQuantity" name="oldData-jobQuantity" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-jobPrice" name="oldData-jobPrice" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-start_event" name="oldData-start_event" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group ">
+                        <input type="text" class="form-control" id="oldData-end_event" name="oldData-end_event" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group"> 
+                        <input type="text" class="form-control" id="oldData-labourDescription" name="oldData-labourDescription" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-labourHours" name="oldData-labourHours" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group ">
+                        <input type="text" class="form-control" id="oldData-labourRate" name="oldData-labourRate" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group ">
+                        <input type="text" class="form-control" id="oldData-labourTotalPrice" name="oldData-labourTotalPrice" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-jobPriority" name="oldData-jobPriority" form="updateDetails" value="" required readonly hidden>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="oldData-status" name="oldData-status" form="updateDetails" value="" required readonly hidden>
+                    </div>
+                    <!-- End of All Old Data -->
+
+                    <!-- Div for Delete PM Modal -->
+                    <div id="deletePmDetails">
+                        <h6><strong>Are you sure you want to delete this PM?</strong></h6>
+                        <p>This PM will be deleted immediately. You can't undo this action.<p>
+                        <br>
+                        <div class="row">
+
+                            <div class="col">
+                                <input type="submit" class="btn btn-danger btn-sm" name="btnDeleteConfirm" id="btnDeleteConfirm" form="updateDetails" value='Confirm Delete'>
+                            </div>
+
+                            <div class="col">
+                                <input type="button" class="btn btn-light btn-sm" id="btnDeleteCancel" value='Cancel'>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Create wrapper for PM New Details -->
+                    <div class="wrapper-pmNewDetails">
+
+                        <!-- Div for update newPmDetails -->
+                        <div id="pmNewDetails">
+                            <!-- Company Details New Entry-->
+                            <div id='modalCompanyDetails'>
+                                <h3>Company Details <i class="far fa-building"></i></h3>
+                                <div class="form-row">
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <div class="form-group">
+                                            <label for="companyName">Company Name</label>
+                                            <input type="text" class="form-control form-input-field" id="companyName" name="companyName" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="address1">Address</label>
+                                            <input type="text" class="form-control form-input-field" id="address1" name="address1" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                        <label for="address2">Address 2</label>
+                                        <input type="text" class="form-control form-input-field" id="address2" name="address2" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="address3">Address 3</label>
+                                            <input type="text" class="form-control form-input-field" id="address3" name="address3" form="updateDetails" value="" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        
+                                        <div class="form-group">
+                                            <label for="phoneNumber">Phone Number</label>
+                                            <input type="text" class="form-control form-input-field" id="phoneNumber" name="phoneNumber" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="landlineNumber">Landline Number</label>
+                                            <input type="text" class="form-control form-input-field" id="landlineNumber" name="landlineNumber" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for=email>Email</label>
+                                            <input type="text" class="form-control form-input-field" id="email" name="email" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="contactName">Contact Name</label>
+                                            <input type="text" class="form-control form-input-field" id="contactName" name="contactName" form="updateDetails" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="city">City</label>
+                                            <input type="text" class="form-control form-input-field" id="city" name="city" form="updateDetails" value="" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="zipCode">Zip/Postal Code</label>
+                                            <input type="text" class="form-control form-input-field" id="zipCode" name="zipCode" form="updateDetails" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- Close Company Details New Entry -->
+
+                            <!-- Job Details New Entry -->
+                            <div id='modalJobDetails'>
+                                <h3>Job Details <i class="fas fa-briefcase"></i></h3>
+                                <div class="form-row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="technician">Technician</label>
+                                            <input type="text" class="form-control form-input-field" id="technician" name="technician" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="jobType">Job Type</label>
+                                            <input type="text" class="form-control form-input-field" id="jobType" name="jobType" form="updateDetails" value="" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="jobDescription">Job Description</label>
+                                            <textarea class="form-control form-input-field" id="jobDescription" name="jobDescription" rows="4" form="updateDetails" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                        <label for="jobPrice">Service/Job Fee</label>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                                            </div>
+                                            <input type="text" class="form-control form-input-field" id="jobPrice" name="jobPrice" form="updateDetails" value="" required>
+                                        </div>
+                                        </div>
+
+                                        <!-- Form-row for DateTimePicker -->
+                                        <div class="form-row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="start_event">Job Starts at</label>
+                                                    <input type="text" class="form-control form-input-field" name="start_event" id="start_event" form="updateDetails" required readonly>
+                                                    <span class="start-event-span span-text"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="end_event">Job Ends at</label>
+                                                    <input type="text" class="form-control form-input-field" name="end_event" id="end_event" form="updateDetails" required readonly> 
+                                                    <span class="end-event-span span-text"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Close Form-row for DateTimePicker -->
+
+                                        <!-- Labor hours and cost per hour -->
+                                        <div class="form-row">
+                                            <div class="col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="labourHours">Labour Hours</label>
+                                                    <input type="text" class="form-control form-input-field" name="labourHours" id="labourHours" form="updateDetails" readonly> 
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="labourRate">Labour Rate</label>
+                                                    <div class="input-group mb-2">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                                                        </div>
+                                                        <input type="text" class="form-control form-input-field" id="labourRate" name="labourRate" form="updateDetails" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Close labor hours and cost per hour -->
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="jobPriority">Priority</label>
+                                                    <select class="form-control form-input-field" id="jobPriority" name="jobPriority" form="updateDetails" required>
+                                                        <option value="" disabled>Select Priority</option>
+                                                        <option value="Low Priority">Low Priority</option>
+                                                        <option value="Medium Priority">Medium Priority</option>
+                                                        <option value="Critical Priority">Critical Priority</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="status">Status</label>
+                                                    <select class="form-control form-input-field" id="status" name="status" form="updateDetails" required>
+                                                        <option value="" disabled>Select PM Status</option>
+                                                        <option value="Open">Open</option>
+                                                        <option value="Complete">Complete</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- Close Job Details New Entry -->
+
+                        </div>
+                        <!-- Close div for update newPmDetails -->
+
+                    </div>
+                    <!-- End of wrapper for PM New Details -->
+                </form>
+
+            </div>
+
+            <!-- Second modal footer to move from one section to another -->
+            <div class="second-modal-footer" id='second-modal-footer'>
+                <div class="right-btn">
+                    <button type="button" class="btn btn-outline-secondary btn-sm btn-modal-body" id='btn-modalNext'>Next&nbsp;<i class="fas fa-caret-right"></i></button>
+                </div>
+
+                <div class="left-btn">
+                    <button type="button" class="btn btn-outline-secondary btn-sm btn-modal-body" id='btn-modalPrevious'><i class="fas fa-caret-left"></i>&nbsp;Previous</button>
+                </div>
+            </div>
+            <!-- End of Second modal footer -->
+
+
+            <!-- Main modal footer -->
+            <div class="main-modal-footer">
+                <div class="left-btn">
+                    <input type="button" class="btn btn-danger btn-sm" id="btnDelete" name='btnDelete' value='Delete PM'>
+                </div>
+
+                <div class="right-btn">
+                    <div class="right-btn-inside">
+                        <input type="submit" class="btn btn-primary btn-sm" id="btnSave" name="btnSave" form="updateDetails" value='Update PM'>
+                        <input type="button" class="btn btn-secondary btn-sm" id="btnCancel" data-dismiss="modal" value='Close'>
+                    </div>
+                </div> 
+            </div>
+            <!-- End of Main modal footer -->
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+    var publicHolidayJson = JSON.parse('{{ getPublicHoliday | tojson | safe }}');
+</script>
+
+<script type="text/javascript" src="static/js/pm_datatable.js"></script>
+<script type="text/javascript" src="static/js/disablepastdates.js"></script>
+
+{% endblock %}

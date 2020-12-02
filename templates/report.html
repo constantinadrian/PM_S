@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    REPORT
+{% endblock %}
+
+
+<!--for extra style-->
+{% block extra_style %}
+<link rel="stylesheet" type="text/css" href="static/css/report.css">
+{% endblock %}
+
+{% block extra_script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+{% endblock %}
+
+
+{% block main %}
+<div class='report-container'>
+    <h3>PM Report For Current Month&nbsp;<i class="far fa-chart-bar"></i></h3>
+
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+
+            <div id='myPieChartContainer'>
+                <canvas id="myPieChart"></canvas>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 col-sm-12">
+
+            <div id="myBarChartContainer">
+                <canvas id="myBarChart"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="report-history-footer">
+        <div class="low-priority">
+            <span class="badge badge-pill badge-primary">Low Priority</span>
+        </div>
+        <div class="medium-priority">
+            <span class="badge badge-pill badge-warning">Medium Priority</span>
+        </div>
+        <div class="critical-priority">
+            <span class="badge badge-pill badge-danger">Critical Priority</span>
+        </div>
+        <div class="complete-priority">
+            <span class="badge badge-pill badge-success">Complete PM</span>
+        </div>
+    </div>
+
+    <div id='pmWorkOrders'>
+        <h3>PM Work Orders Completed $ For Current Year&nbsp;<i class="fas fa-chart-line"></i></h3>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+
+                <div id="myLineChartContainer">
+                    <canvas id="myLineChart"></canvas>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    var currentMonthReport = JSON.parse('{{ currentMonthPmReport | tojson | safe }}');
+
+    var currentYearWorkOrdersCompleted = JSON.parse('{{ currentYearWorkOrdersCompleted | tojson | safe }}');
+</script>
+
+<script type="text/javascript" src="static/js/report.js"></script>
+
+{% endblock %}
