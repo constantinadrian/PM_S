@@ -88,7 +88,6 @@ for (var i = 0; i < buttons.length; i++) {
 		{
 			if (typeof compInvoices[j][invoiceNumber] !== "undefined")
 			{
-				// console.log(compInvoices[j][invoiceNumber])
 				pdfDetails = compInvoices[j][invoiceNumber];
 				generatePdf();
 			}

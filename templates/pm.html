@@ -441,7 +441,6 @@
             </div>
             <!-- End of Second modal footer -->
 
-
             <!-- Main modal footer -->
             <div class="main-modal-footer">
                 <div class="left-btn">
@@ -464,12 +463,10 @@
 
 
 {% block javascript %}
-
 <script>
     var publicHolidayJson = JSON.parse('{{ getPublicHoliday | tojson | safe }}');
 </script>
 
 <script type="text/javascript" src="static/js/pm_datatable.js"></script>
 <script type="text/javascript" src="static/js/disablepastdates.js"></script>
-
 {% endblock %}

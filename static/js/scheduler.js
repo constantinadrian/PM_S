@@ -29,7 +29,6 @@ $(document).ready(function() {
     // iterate thru data array and to set up events in calendar
     // display data in calendar credit https://www.youtube.com/watch?v=wA-Iy6ThYz4
     $.each(data, function(index, value){
-        // console.log(typeof(moment(v.end_event, 'YYYY-M-D H:mm')))
         // create an event object
         events.push({
             title: value.title,
@@ -41,7 +40,6 @@ $(document).ready(function() {
             borderColor: 'black'
         });
     });
-    // console.log(events);
                 
     // Removes elements, events handlers, and internal data.
     $('#calendar').fullCalendar('destroy');

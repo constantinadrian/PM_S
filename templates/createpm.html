@@ -213,8 +213,6 @@
 
 
 {% block javascript %}
-
-
 <script>
     var publicHolidayJson = JSON.parse('{{ getPublicHoliday | tojson | safe }}');
 </script>
@@ -222,5 +220,4 @@
 <script type="text/javascript" src="static/js/disablepastdates.js"></script>
 
 <script type="text/javascript" src="static/js/createpm.js"></script>
-
 {% endblock %}

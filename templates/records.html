@@ -95,15 +95,11 @@
 
 
 {% block javascript %}
-
 <script>
-
     var userCompDetails = JSON.parse('{{ userCompanyDetails | tojson | safe }}');
     
     var compInvoices = JSON.parse('{{ invoices | tojson | safe }}');
-
 </script>
 
 <script type="text/javascript" src="static/js/records.js"></script>
-
 {% endblock %}
